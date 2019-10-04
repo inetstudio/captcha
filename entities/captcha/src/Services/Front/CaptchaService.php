@@ -50,7 +50,7 @@ class CaptchaService implements CaptchaServiceContract
 
         foreach ($config ?? [] as $property => $value) {
             if (property_exists($this, $property)) {
-                $this->$property = $value;
+                $this->$property = ($property == 'http') ? new Client($value) : $value;
             }
         }
     }
@@ -153,20 +153,18 @@ class CaptchaService implements CaptchaServiceContract
     }
 
     /**
-     * Verify no-captcha response by Symfony Request.
+     * Verify no-captcha response.
      *
-     * @param  Request  $request
+     * @param  string  $value
+     * @param  string  $ip
      *
      * @return bool
      *
      * @throws GuzzleException
      */
-    public function verifyRequest(Request $request): bool
+    public function verifyRequest(string $value, string $ip): bool
     {
-        return $this->verifyResponse(
-            $request->get('g-recaptcha-response'),
-            $request->getClientIp()
-        );
+        return $this->verifyResponse($value, $ip);
     }
 
     /**
