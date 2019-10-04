@@ -1,0 +1,28 @@
+{
+    "name": "inetstudio/captcha",
+    "description": "Package for captcha",
+    "homepage": "https://github.com/inetstudio/captcha",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Konstantin Bukin",
+        "email": "bukin@inetstudio.ru"
+      }
+    ],
+    "autoload": {
+      "psr-4": {
+        "InetStudio\\CaptchaPackage\\Captcha\\": "entities/captcha/src"
+      },
+      "files": [
+        "entities/captcha/src/helpers.php"
+      ]
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "InetStudio\\CaptchaPackage\\Captcha\\Providers\\BindingsServiceProvider",
+          "InetStudio\\CaptchaPackage\\Captcha\\Providers\\ServiceProvider"
+        ]
+      }
+    }
+}
